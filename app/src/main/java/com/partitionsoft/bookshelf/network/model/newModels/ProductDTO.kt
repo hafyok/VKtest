@@ -3,7 +3,7 @@ package com.partitionsoft.bookshelf.network.model.newModels
 import com.google.gson.annotations.SerializedName
 
 
-data class Product(
+data class ProductDTO(
 
     @SerializedName("id") var id: Int? = null,
     @SerializedName("title") var title: String? = null,
