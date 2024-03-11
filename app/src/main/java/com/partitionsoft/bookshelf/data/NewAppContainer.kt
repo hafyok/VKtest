@@ -5,6 +5,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 interface NewAppContainer {
+    val productsRepository: ProductsRepository
 }
 
 class DefaultNewAppContainer : NewAppContainer{
@@ -17,5 +18,9 @@ class DefaultNewAppContainer : NewAppContainer{
 
     private val retrofitService: ProductRetrofit by lazy {
         retrofit.create(ProductRetrofit::class.java)
+    }
+
+    override val productsRepository: ProductsRepository by lazy {
+        NetworkProductsRepository(retrofitService)
     }
 }
