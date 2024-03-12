@@ -1,23 +1,19 @@
 package com.partitionsoft.bookshelf.ui.screens
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.itemsIndexed
+import androidx.compose.material.Button
 import androidx.compose.material.Card
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.drawWithContent
-import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -28,18 +24,61 @@ import coil.request.ImageRequest
 import com.example.bookshelf.R
 import com.partitionsoft.bookshelf.data.ProductData
 
+
+@Preview
+@Composable
+fun PreviewBooksGridScreen() {
+    val product = listOf<ProductData>(
+        ProductData(
+        "Title Test Title Test ",
+        "Description test",
+        "https://cdn.dummyjson.com/product-images/1/thumbnail.jpg"
+        ),
+        ProductData(
+            "Title Test Title Test ",
+            "Description test",
+            "https://cdn.dummyjson.com/product-images/1/thumbnail.jpg"
+        ),
+        ProductData(
+            "Title Test Title Test ",
+            "Description test",
+            "https://cdn.dummyjson.com/product-images/1/thumbnail.jpg"
+        ),
+        ProductData(
+            "Title Test Title Test ",
+            "Description test",
+            "https://cdn.dummyjson.com/product-images/1/thumbnail.jpg"
+        ),
+        ProductData(
+            "Title Test Title Test ",
+            "Description test",
+            "https://cdn.dummyjson.com/product-images/1/thumbnail.jpg"
+        ),
+        ProductData(
+            "Title Test Title Test ",
+            "Description test",
+            "https://cdn.dummyjson.com/product-images/1/thumbnail.jpg"
+        ),
+
+    )
+    BooksGridScreen(products = product, modifier = Modifier)
+}
+
 @Composable
 fun BooksGridScreen(
     products: List<ProductData>,
     modifier: Modifier,
     //onProductClicked: (ProductData) -> Unit
 ) {
-    LazyVerticalGrid(
-        columns = GridCells.Adaptive(150.dp),
-        contentPadding = PaddingValues(4.dp)
-    ) {
-        itemsIndexed(products) { _, prod ->
-            BooksCard(product = prod, modifier, /*onProductClicked*/)
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        LazyVerticalGrid(
+            columns = GridCells.Adaptive(150.dp),
+            contentPadding = PaddingValues(4.dp)
+        ) {
+            itemsIndexed(products) { _, prod ->
+                BooksCard(product = prod, modifier, /*onProductClicked*/)
+            }
+            //if (products.size < )
         }
     }
 }
@@ -95,13 +134,3 @@ fun BooksCard(
     }
 }
 
-@Preview
-@Composable
-fun PreviewBooksCard() {
-    val product = ProductData(
-        "Title Test Title Test ",
-        "Description test",
-        "https://cdn.dummyjson.com/product-images/1/thumbnail.jpg"
-    )
-    BooksCard(product = product, modifier = Modifier)
-}
