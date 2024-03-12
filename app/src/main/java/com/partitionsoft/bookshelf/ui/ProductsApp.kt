@@ -22,7 +22,7 @@ fun ProductsApp(
 
     Scaffold(
         modifier = modifier.fillMaxSize(),
-        topBar = { TopAppBar(title = { Text(stringResource(id = R.string.app_name))})
+        topBar = { /*TopAppBar(title = { Text(stringResource(id = R.string.app_name))})*/
             /*MainAppBar(
                 searchWidgetState = searchWidgetState.value,
                 searchTextState = searchTextState.value,
