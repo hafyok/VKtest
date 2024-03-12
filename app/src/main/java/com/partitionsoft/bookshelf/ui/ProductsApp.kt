@@ -6,28 +6,24 @@ import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.bookshelf.R
-import com.partitionsoft.bookshelf.data.Book
 import com.partitionsoft.bookshelf.ui.screens.HomeScreen
-import com.partitionsoft.bookshelf.ui.screens.MainAppBar
 
-@Preview
 @Composable
-fun BooksApp(
+fun ProductsApp(
     modifier: Modifier = Modifier,
-    onBookClicked: (Book) -> Unit
+    //onProductsClicked: (ProductData) -> Unit
 ) {
-    val booksViewModel: BooksViewModel =
-        viewModel(factory = BooksViewModel.Factory)
-    val searchWidgetState = booksViewModel.searchWidgetState
-    val searchTextState = booksViewModel.searchTextState
+    val productsViewModel: ProductsViewModel =
+        viewModel(factory = ProductsViewModel.Factory)
+    /*val searchWidgetState = booksViewModel.searchWidgetState
+    val searchTextState = booksViewModel.searchTextState*/
 
     Scaffold(
         modifier = modifier.fillMaxSize(),
-        topBar = {
-            MainAppBar(
+        topBar = { TopAppBar(title = { Text(stringResource(id = R.string.app_name))})
+            /*MainAppBar(
                 searchWidgetState = searchWidgetState.value,
                 searchTextState = searchTextState.value,
                 onTextChange = {
@@ -42,7 +38,7 @@ fun BooksApp(
                 onSearchTriggered = {
                     booksViewModel.updateSearchWidgetState(newValue = BooksViewModel.SearchWidgetState.OPENED)
                 }
-            )
+            )*/
         }
     ) {
         Surface(modifier = modifier
@@ -51,10 +47,10 @@ fun BooksApp(
             color = MaterialTheme.colors.background
         ) {
             HomeScreen(
-                booksUiState = booksViewModel.booksUiState,
-                retryAction = { booksViewModel.getBooks() },
+                productsUiState = productsViewModel.productsUiState,
+                retryAction = { productsViewModel.getProducts() },
                 modifier = modifier,
-                onBookClicked
+                //onProductsClicked
             )
         }
     }

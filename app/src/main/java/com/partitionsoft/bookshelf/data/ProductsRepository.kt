@@ -1,5 +1,6 @@
 package com.partitionsoft.bookshelf.data
 
+import android.util.Log
 import com.partitionsoft.bookshelf.network.ProductRetrofit
 
 interface ProductsRepository{
@@ -14,6 +15,7 @@ class NetworkProductsRepository(
         limitResults: Int,
         maxResults: Int
     ): List<ProductData> = productRetrofit.vkProdSearch(limitResults, maxResults).productDTOS.map {items ->
+        Log.d("PRODUCTS", "GET")
         ProductData(
             title = items.title,
             description = items.description,

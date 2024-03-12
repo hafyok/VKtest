@@ -2,23 +2,22 @@ package com.partitionsoft.bookshelf.ui.screens
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.partitionsoft.bookshelf.data.Book
-import com.partitionsoft.bookshelf.ui.BooksUiState
+import com.partitionsoft.bookshelf.ui.ProductsUiState
 
 @Composable
 fun HomeScreen(
-    booksUiState: BooksUiState,
+    productsUiState: ProductsUiState,
     retryAction: () -> Unit,
     modifier: Modifier,
-    onBookClicked: (Book) -> Unit
+    //onProductClicked: (ProductData) -> Unit
 ) {
-    when (booksUiState) {
-        is BooksUiState.Loading -> LoadingScreen(modifier)
-        is BooksUiState.Success -> BooksGridScreen(
-            books = booksUiState.bookSearch,
+    when (productsUiState) {
+        is ProductsUiState.Loading -> LoadingScreen(modifier)
+        is ProductsUiState.Success -> BooksGridScreen(
+            products = productsUiState.productsSearch,
             modifier = modifier,
-            onBookClicked
+            //onProductClicked
         )
-        is BooksUiState.Error -> ErrorScreen(retryAction = retryAction, modifier)
+        is ProductsUiState.Error -> ErrorScreen(retryAction = retryAction, modifier)
     }
 }

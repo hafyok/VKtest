@@ -9,7 +9,7 @@ interface NewAppContainer {
 }
 
 class DefaultNewAppContainer : NewAppContainer{
-    private val BASE_URL = "https://dummyjson.com/products"
+    private val BASE_URL = "https://dummyjson.com/"
 
     private val retrofit: Retrofit = Retrofit.Builder()
         .addConverterFactory(GsonConverterFactory.create())

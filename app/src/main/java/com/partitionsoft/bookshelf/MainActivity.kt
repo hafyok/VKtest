@@ -1,12 +1,9 @@
 package com.partitionsoft.bookshelf
 
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.core.content.ContextCompat
-import com.partitionsoft.bookshelf.ui.BooksApp
+import com.partitionsoft.bookshelf.ui.ProductsApp
 import com.partitionsoft.bookshelf.ui.theme.BookShelfTheme
 
 class MainActivity : ComponentActivity() {
@@ -14,7 +11,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             BookShelfTheme {
-                BooksApp(
+                /*BooksApp(
                     onBookClicked = {
                         ContextCompat.startActivity(
                             this,
@@ -22,7 +19,8 @@ class MainActivity : ComponentActivity() {
                             null
                         )
                     }
-                )
+                )*/
+                ProductsApp()
             }
         }
     }
