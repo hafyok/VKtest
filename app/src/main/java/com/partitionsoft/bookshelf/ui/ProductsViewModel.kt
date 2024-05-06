@@ -32,12 +32,12 @@ class ProductsViewModel(
         getProducts()
     }
 
-    fun getProducts(limitResults: Int = 20, maxResults: Int = 20) {
+    fun getProducts(limitResults: Int = 20, skipResults: Int = 0) {
         viewModelScope.launch {
             productsUiState = ProductsUiState.Loading
             productsUiState =
                 try {
-                    ProductsUiState.Success(productsRepository.getProducts(limitResults, maxResults))
+                    ProductsUiState.Success(productsRepository.getProducts(limitResults, skipResults))
                 } catch (e: IOException) {
                     ProductsUiState.Error
                 } catch (e: HttpException) {

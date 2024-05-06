@@ -8,6 +8,6 @@ interface ProductRetrofit {
     @GET("products")
     suspend fun vkProdSearch(
         @Query("limits") limitResults: Int,
-        @Query("skip") maxResults: Int
+        @Query("skip") skipResults: Int
     ): VK
 }
