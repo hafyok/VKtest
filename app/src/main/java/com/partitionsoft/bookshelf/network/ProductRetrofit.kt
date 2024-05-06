@@ -7,7 +7,7 @@ import retrofit2.http.Query
 interface ProductRetrofit {
     @GET("products")
     suspend fun vkProdSearch(
-        @Query("limits") limitResults: Int,
+        @Query("limit") limitResults: Int,
         @Query("skip") skipResults: Int
     ): VK
 }
