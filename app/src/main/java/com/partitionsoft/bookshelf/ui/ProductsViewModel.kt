@@ -27,22 +27,29 @@ class ProductsViewModel(
 ) : ViewModel() {
     var productsUiState: ProductsUiState by mutableStateOf(ProductsUiState.Loading)
         private set
+    private var skip = 0
 
     init {
         getProducts()
     }
 
-    fun getProducts(limitResults: Int = 20, skipResults: Int = 0) {
+    fun getProducts(limitResults: Int = 20) {
         viewModelScope.launch {
             productsUiState = ProductsUiState.Loading
             productsUiState =
                 try {
-                    ProductsUiState.Success(productsRepository.getProducts(limitResults, skipResults))
+                    ProductsUiState.Success(productsRepository.getProducts(limitResults, skip))
                 } catch (e: IOException) {
                     ProductsUiState.Error
                 } catch (e: HttpException) {
                     ProductsUiState.Error
                 }
+        }
+    }
+
+    fun nextPage(){
+        viewModelScope.launch {
+            skip += 20
         }
     }
 

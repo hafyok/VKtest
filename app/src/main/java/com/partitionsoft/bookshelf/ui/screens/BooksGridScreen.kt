@@ -26,15 +26,19 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.example.bookshelf.R
 import com.partitionsoft.bookshelf.data.ProductData
+import com.partitionsoft.bookshelf.ui.ProductsViewModel
 
 
 @Preview
 @Composable
 fun PreviewBooksGridScreen() {
+    val productsViewModel: ProductsViewModel =
+        viewModel(factory = ProductsViewModel.Factory)
     val product = listOf<ProductData>(
         ProductData(
             "Title Test Title Test ",
@@ -68,13 +72,14 @@ fun PreviewBooksGridScreen() {
         ),
 
         )
-    BooksGridScreen(products = product, modifier = Modifier)
+    BooksGridScreen(products = product, modifier = Modifier, productsViewModel = productsViewModel)
 }
 
 @Composable
 fun BooksGridScreen(
     products: List<ProductData>,
     modifier: Modifier,
+    productsViewModel: ProductsViewModel
     //onProductClicked: (ProductData) -> Unit
 ) {
 
@@ -103,7 +108,10 @@ fun BooksGridScreen(
                 .align(Alignment.BottomEnd)
                 .padding(16.dp)
         ) {
-            Button(onClick = { }) {
+            Button(onClick = {
+                productsViewModel.nextPage()
+                productsViewModel.getProducts()
+            }) {
                 Text(text = "Next")
             }
         }

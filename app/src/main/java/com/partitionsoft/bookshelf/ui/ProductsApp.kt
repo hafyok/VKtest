@@ -5,9 +5,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.bookshelf.R
 import com.partitionsoft.bookshelf.ui.screens.HomeScreen
 
 @Composable
@@ -50,6 +48,7 @@ fun ProductsApp(
                 productsUiState = productsViewModel.productsUiState,
                 retryAction = { productsViewModel.getProducts() },
                 modifier = modifier,
+                productsViewModel = productsViewModel
                 //onProductsClicked
             )
         }
