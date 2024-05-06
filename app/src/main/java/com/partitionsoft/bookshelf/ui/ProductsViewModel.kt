@@ -48,11 +48,12 @@ class ProductsViewModel(
     }
 
     fun nextPage(){
-        viewModelScope.launch {
-            skip += 20
-        }
+        if (skip < 80) skip += 20
     }
 
+    fun previousPage(){
+        if (skip > 0) skip -= 20
+    }
 
 
     companion object {

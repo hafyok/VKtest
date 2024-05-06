@@ -98,7 +98,10 @@ fun BooksGridScreen(
                 .align(Alignment.BottomStart)
                 .padding(16.dp)
         ) {
-            Button(onClick = { }) {
+            Button(onClick = {
+                productsViewModel.previousPage()
+                productsViewModel.getProducts()
+            }) {
                 Text(text = "Previous")
             }
         }
