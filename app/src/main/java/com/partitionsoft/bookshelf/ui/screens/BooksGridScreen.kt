@@ -1,6 +1,13 @@
 package com.partitionsoft.bookshelf.ui.screens
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.requiredHeight
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.itemsIndexed
@@ -30,9 +37,9 @@ import com.partitionsoft.bookshelf.data.ProductData
 fun PreviewBooksGridScreen() {
     val product = listOf<ProductData>(
         ProductData(
-        "Title Test Title Test ",
-        "Description test",
-        "https://cdn.dummyjson.com/product-images/1/thumbnail.jpg"
+            "Title Test Title Test ",
+            "Description test",
+            "https://cdn.dummyjson.com/product-images/1/thumbnail.jpg"
         ),
         ProductData(
             "Title Test Title Test ",
@@ -60,7 +67,7 @@ fun PreviewBooksGridScreen() {
             "https://cdn.dummyjson.com/product-images/1/thumbnail.jpg"
         ),
 
-    )
+        )
     BooksGridScreen(products = product, modifier = Modifier)
 }
 
@@ -70,15 +77,35 @@ fun BooksGridScreen(
     modifier: Modifier,
     //onProductClicked: (ProductData) -> Unit
 ) {
-    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+
+    Box(modifier = Modifier.fillMaxSize()) {
         LazyVerticalGrid(
             columns = GridCells.Adaptive(150.dp),
             contentPadding = PaddingValues(4.dp)
         ) {
             itemsIndexed(products) { _, prod ->
-                BooksCard(product = prod, modifier, /*onProductClicked*/)
+                BooksCard(product = prod, modifier /*onProductClicked*/)
             }
-            //if (products.size < )
+        }
+
+        Column(
+            modifier = Modifier
+                .align(Alignment.BottomStart)
+                .padding(16.dp)
+        ) {
+            Button(onClick = { }) {
+                Text(text = "Previous")
+            }
+        }
+
+        Column(
+            modifier = Modifier
+                .align(Alignment.BottomEnd)
+                .padding(16.dp)
+        ) {
+            Button(onClick = { }) {
+                Text(text = "Next")
+            }
         }
     }
 }
