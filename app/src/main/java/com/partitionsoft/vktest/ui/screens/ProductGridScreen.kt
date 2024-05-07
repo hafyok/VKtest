@@ -86,7 +86,11 @@ fun PreviewProductGridScreen() {
         ),
 
         )
-    ProductGridScreen(products = product, modifier = Modifier, productsViewModel = productsViewModel)
+    ProductGridScreen(
+        products = product,
+        modifier = Modifier,
+        productsViewModel = productsViewModel
+    )
 }
 
 @Composable
@@ -218,11 +222,4 @@ fun AnimatedTextReading(text: String) {
             }
         }
     }
-}
-
-@Preview
-@Composable
-fun PreviewAnimatedTextReading() {
-    val text = "This is a sample text for animated reading"
-    AnimatedTextReading(text = text)
 }

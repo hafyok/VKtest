@@ -11,6 +11,9 @@
       <entry key="PreviewBooksGridScreen">
         <State />
       </entry>
+      <entry key="PreviewProductItemScreen">
+        <State />
+      </entry>
       <entry key="app">
         <State />
       </entry>
