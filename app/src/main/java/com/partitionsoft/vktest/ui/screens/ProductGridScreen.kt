@@ -6,6 +6,7 @@ import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -26,6 +27,9 @@ import androidx.compose.material.Card
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
@@ -51,9 +55,8 @@ import com.partitionsoft.vktest.ui.ProductsViewModel
 @Preview
 @Composable
 fun PreviewProductGridScreen() {
-    val productsViewModel: ProductsViewModel =
-        viewModel(factory = ProductsViewModel.Factory)
-    val product = listOf<ProductData>(
+    val productsViewModel: ProductsViewModel = viewModel(factory = ProductsViewModel.Factory)
+    val product = listOf(
         ProductData(
             "Title Test Title Test Title Test",
             "Description test Description test Description test",
@@ -87,24 +90,19 @@ fun PreviewProductGridScreen() {
 
         )
     ProductGridScreen(
-        products = product,
-        modifier = Modifier,
-        productsViewModel = productsViewModel
+        products = product, modifier = Modifier, productsViewModel = productsViewModel
     )
 }
 
 @Composable
 fun ProductGridScreen(
-    products: List<ProductData>,
-    modifier: Modifier,
-    productsViewModel: ProductsViewModel
+    products: List<ProductData>, modifier: Modifier, productsViewModel: ProductsViewModel
     //onProductClicked: (ProductData) -> Unit
 ) {
 
     Box(modifier = Modifier.fillMaxSize()) {
         LazyVerticalGrid(
-            columns = GridCells.Adaptive(150.dp),
-            contentPadding = PaddingValues(4.dp)
+            columns = GridCells.Adaptive(150.dp), contentPadding = PaddingValues(4.dp)
         ) {
             itemsIndexed(products) { _, prod ->
                 ProductCard(product = prod, modifier /*onProductClicked*/)
@@ -146,23 +144,21 @@ fun ProductCard(
     modifier: Modifier,
     //onBookClicked: (ProductData) -> Unit
 ) {
-    Card(
-        shape = RoundedCornerShape(10.dp),
+    var showDialog by remember { mutableStateOf(false) }
+
+    Card(shape = RoundedCornerShape(10.dp),
         modifier = Modifier
+            .clickable { showDialog = true }
             .shadow(elevation = 15.dp)
             .padding(4.dp)
             .fillMaxWidth()
             .requiredHeight(296.dp),
-        //.clickable { onBookClicked(product) },
-        elevation = 8.dp
-    ) {
+        elevation = 8.dp) {
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
             AsyncImage(
                 modifier = modifier.size(230.dp),
                 model = ImageRequest.Builder(context = LocalContext.current)
-                    .data(product.thumbnail?.replace("http:", "https:"))
-                    .crossfade(true)
-                    .build(),
+                    .data(product.thumbnail?.replace("http:", "https:")).crossfade(true).build(),
                 error = painterResource(id = R.drawable.vk_logo),
                 placeholder = painterResource(id = R.drawable.loading_img),
                 contentDescription = stringResource(id = R.string.content_description),
@@ -176,13 +172,15 @@ fun ProductCard(
                 Text(
                     text = it,
                     textAlign = TextAlign.Start,
-                    modifier = modifier
-                        .padding(4.dp),
-                    //fontWeight = FontWeight.Bold,
+                    modifier = modifier.padding(4.dp),
                     fontSize = 14.sp
                 )
             }
         }
+    }
+
+    if (showDialog) {
+        ProductItemScreen(onDismissRequest = { showDialog = false }, product, Modifier)
     }
 }
 
@@ -191,11 +189,8 @@ fun ProductCard(
 fun AnimatedTextReading(text: String) {
     val infiniteTransition = rememberInfiniteTransition()
     val offsetX by infiniteTransition.animateFloat(
-        initialValue = 0f,
-        targetValue = -250f,
-        animationSpec = infiniteRepeatable(
-            animation = tween(15000, easing = LinearEasing),
-            repeatMode = RepeatMode.Restart
+        initialValue = 0f, targetValue = -250f, animationSpec = infiniteRepeatable(
+            animation = tween(15000, easing = LinearEasing), repeatMode = RepeatMode.Restart
         )
     )
 
@@ -206,13 +201,10 @@ fun AnimatedTextReading(text: String) {
     ) {
         item {
             Box(
-                modifier = Modifier
-                    .offset(x = offsetX.dp)
+                modifier = Modifier.offset(x = offsetX.dp)
             ) {
                 Text(
-                    text = text,
-                    modifier = Modifier.padding(2.dp),
-                    style = TextStyle(
+                    text = text, modifier = Modifier.padding(2.dp), style = TextStyle(
                         fontSize = 18.sp,
                         fontWeight = FontWeight.Bold,
                         color = Color.Black,
