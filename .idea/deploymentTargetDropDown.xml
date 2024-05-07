@@ -2,6 +2,12 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
+      <entry key="PreviewAnimatedLazyRow">
+        <State />
+      </entry>
+      <entry key="PreviewAnimatedTextReading">
+        <State />
+      </entry>
       <entry key="PreviewBooksGridScreen">
         <State />
       </entry>
